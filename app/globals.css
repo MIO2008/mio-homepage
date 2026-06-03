@@ -85,10 +85,10 @@ button {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 42px;
+  gap: 46px;
   color: var(--navy);
   font-family: var(--font-inter), Arial, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 800;
 }
 
@@ -132,8 +132,9 @@ button {
 }
 
 .nav-dropdown-menu a {
-  padding: 10px 12px;
+  padding: 11px 13px;
   color: var(--navy);
+  font-size: 15px;
   white-space: nowrap;
 }
 
@@ -175,6 +176,7 @@ button {
   margin: 0 auto;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
+  font-size: 17px;
   font-weight: 800;
 }
 
@@ -189,7 +191,7 @@ button {
   padding: 9px 0 9px 18px;
   border-bottom: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .main-visual {
@@ -387,9 +389,34 @@ button {
   background: var(--white);
 }
 
-.product-section,
 .contact-section {
   background: var(--soft);
+}
+
+.product-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(68, 198, 231, 0.12), transparent 26%),
+    linear-gradient(150deg, transparent 0 42%, rgba(68, 198, 231, 0.12) 42.2%, transparent 42.6% 100%),
+    linear-gradient(150deg, transparent 0 70%, rgba(61, 208, 255, 0.08) 70.2%, transparent 70.6% 100%),
+    linear-gradient(180deg, #101826 0%, #111a28 100%);
+  color: var(--white);
+}
+
+.product-section::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(150deg, transparent 0 16%, rgba(68, 198, 231, 0.12) 16.2%, transparent 16.7% 100%),
+    linear-gradient(150deg, transparent 0 64%, rgba(255, 212, 39, 0.08) 64.2%, transparent 64.6% 100%);
+  content: "";
+}
+
+.product-section .section-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .company-grid,
@@ -454,14 +481,26 @@ h2 {
 .section-heading {
   display: grid;
   max-width: 100%;
-  gap: 6px;
-  margin-bottom: 34px;
+  gap: 14px;
+  margin-bottom: 42px;
 }
 
 .product-label-stack {
+  position: relative;
   display: grid;
-  gap: 3px;
+  gap: 5px;
   justify-items: start;
+  padding-left: 20px;
+}
+
+.product-label-stack::before {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #44c6e7, var(--accent));
+  content: "";
 }
 
 .product-label-stack .section-kicker {
@@ -471,7 +510,7 @@ h2 {
 .product-label-stack span {
   color: #44c6e7;
   font-family: var(--font-inter), Arial, sans-serif;
-  font-size: clamp(30px, 4.2vw, 48px);
+  font-size: clamp(34px, 4.8vw, 58px);
   font-weight: 800;
   line-height: 1.02;
 }
@@ -479,6 +518,9 @@ h2 {
 .product-heading {
   display: grid;
   gap: 2px;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.06;
   white-space: normal;
 }
 
@@ -488,7 +530,7 @@ h2 {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   align-items: stretch;
   background: transparent;
@@ -496,10 +538,11 @@ h2 {
 
 .product-card {
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(68, 198, 231, 0.22);
   border-radius: 6px;
-  background: var(--white);
-  box-shadow: 0 14px 34px rgba(16, 24, 38, 0.06);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.045));
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .product-card a {
@@ -509,44 +552,85 @@ h2 {
   grid-template-rows: 1fr auto;
 }
 
+.product-card--simple a {
+  min-height: 248px;
+  grid-template-rows: 1fr;
+}
+
+.product-card--simple .product-copy {
+  min-height: 248px;
+  justify-content: space-between;
+  border-top: 0;
+  background:
+    linear-gradient(135deg, rgba(68, 198, 231, 0.18), transparent 42%),
+    linear-gradient(180deg, rgba(12, 26, 43, 0.96), rgba(8, 18, 32, 0.98));
+}
+
+.product-card--simple .product-copy span {
+  color: rgba(68, 198, 231, 0.86);
+  font-size: 14px;
+}
+
+.product-card--simple .product-copy h3 {
+  margin: auto 0 12px;
+  font-size: clamp(28px, 3vw, 38px);
+}
+
+.product-card--simple .product-copy p {
+  max-width: 220px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .product-image {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: linear-gradient(180deg, #f8fafc, #edf2f6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(135deg, rgba(68, 198, 231, 0.16), transparent 48%),
+    linear-gradient(180deg, #081421, #0d1a2a);
 }
 
 .product-image img {
   object-fit: cover;
   object-position: center;
-  transition: transform 220ms ease;
+  transition: transform 260ms ease;
 }
 
 .product-image--contain {
-  background: linear-gradient(180deg, #ffffff, #f6f8fb);
+  background:
+    linear-gradient(135deg, rgba(68, 198, 231, 0.18), transparent 52%),
+    linear-gradient(180deg, #081421, #0d1a2a);
 }
 
 .product-image--contain img {
-  object-fit: contain;
-  padding: 18px;
+  object-fit: cover;
+  padding: 0;
 }
 
 .product-card:hover img {
-  transform: scale(1.05);
+  transform: scale(1.045);
+}
+
+.product-card:hover {
+  border-color: rgba(68, 198, 231, 0.62);
+  box-shadow: 0 26px 64px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
 }
 
 .product-copy {
-  min-height: 118px;
-  padding: 24px;
-  border-top: 1px solid var(--line);
-  background: var(--white);
+  min-height: 126px;
+  padding: 24px 26px 26px;
+  border-top: 1px solid rgba(68, 198, 231, 0.2);
+  background:
+    linear-gradient(180deg, rgba(12, 26, 43, 0.96), rgba(8, 18, 32, 0.98));
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .product-copy span {
-  color: #b79300;
+  color: #44c6e7;
   font-family: var(--font-inter), Arial, sans-serif;
   font-size: 12px;
   font-weight: 800;
@@ -554,14 +638,14 @@ h2 {
 
 .product-copy h3 {
   margin: 8px 0 8px;
-  color: var(--navy);
+  color: var(--white);
   font-size: 20px;
   line-height: 1.25;
 }
 
 .product-copy p {
   margin: 0;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.66);
   font-size: 14px;
 }
 
@@ -1204,11 +1288,16 @@ h2 {
     background: transparent;
   }
 
+  .product-card:hover {
+    transform: none;
+  }
+
   .product-card a {
     min-height: 0;
   }
 
   .product-image {
+    border-width: 12px;
     min-height: 0;
   }
 

@@ -4,6 +4,30 @@ import { notFound } from "next/navigation";
 
 const products = [
   {
+    slug: "custom",
+    title: "맞춤제작",
+    image: "/assets/what-we-do-processes-no-labels.jpg",
+    summary: "고객이 요구하는 규격, 광학 특성, 적용 환경에 맞춰 광학 부품 제작 조건을 설계하고 생산합니다.",
+    features: ["Custom specification review", "Optical performance target setup", "Prototype and production support"],
+    applications: ["광학 부품 개발", "소량 맞춤 생산", "양산 전 샘플 제작"]
+  },
+  {
+    slug: "coating",
+    title: "COATING",
+    image: "/assets/technology-coating-equipment.jpg",
+    summary: "E-beam 진공 증착 기반의 광학 박막 코팅으로 투과율, 반사율, 파장 특성을 정밀하게 제어합니다.",
+    features: ["E-beam vacuum deposition", "Optical thin-film coating", "Spectral performance check"],
+    applications: ["Optical Mirror", "Filter", "Window", "Prism"]
+  },
+  {
+    slug: "dicing",
+    title: "DICING",
+    image: "/assets/technology-dicing-equipment.jpg",
+    summary: "광학 및 전자 부품 소재를 목적 규격에 맞춰 정밀 절단하고, 치수와 외관을 안정적으로 검증합니다.",
+    features: ["Precision dicing", "Dimension control", "Cleaning & inspection"],
+    applications: ["정밀 절단", "규격 가공", "외관 및 치수 검증"]
+  },
+  {
     slug: "optical-mirror",
     title: "Optical Mirror",
     image: "/assets/detail-optical-mirror.jpg",

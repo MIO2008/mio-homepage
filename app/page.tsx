@@ -4,42 +4,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const navItems = [
-  ["PRODUCT", "#products"],
-  ["TECHNOLOGY", "#technology"],
-  ["WHAT WE DO", "#what-we-do"],
-  ["ABOUT US", "#about"],
-  ["CONTACT", "#contact"]
-];
-
 const aboutMenuItems = [
   ["인삿말", "/about/greeting"],
   ["인증현황", "/about/certifications"],
   ["찾아오시는길", "/about/location"]
 ];
 
-const heroTags = ["Optical Mirror", "Filter", "Window", "Prism", "Coating"];
-
-const productCards = [
-  { title: "Optical Mirror", image: "/assets/product-optical-mirror-clean.jpg", href: "/products/optical-mirror", fit: "contain" },
-  { title: "Filter", image: "/assets/product-filter-welding-no-otos.jpg", href: "/products/filter", fit: "contain" },
-  { title: "Window", image: "/assets/product-window-lens.jpg", href: "/products/window", fit: "contain" },
-  { title: "Prism", image: "/assets/product-prism-color.jpg", href: "/products/prism", fit: "contain" }
+const productMenuItems = [
+  ["COATING", "/products/coating"],
+  ["DICING", "/products/dicing"]
 ];
 
-const technologyProcesses = [
-  {
-    title: "Coating",
-    image: "/assets/technology-coating-equipment.jpg",
-    description: "E-beam 진공 증착 기반의 광학 박막 코팅으로 투과율, 반사율, 파장 특성을 정밀하게 제어합니다.",
-    steps: ["E-beam vacuum deposition", "Optical thin-film coating", "Spectral performance check"]
-  },
-  {
-    title: "Dicing",
-    image: "/assets/technology-dicing-equipment.jpg",
-    description: "광학 및 전자 부품 소재를 목적 규격에 맞춰 정밀 절단하고, 치수와 외관을 안정적으로 검증합니다.",
-    steps: ["Precision dicing", "Dimension control", "Cleaning & inspection"]
-  }
+const technologyMenuItems = [
+  ["맞춤제작", "/technology/custom-production"],
+  ["생산공정", "/technology/process"],
+  ["보유설비", "/technology/equipment"],
+  ["측정설비", "/technology/measurement"]
+];
+
+const navItems = [
+  { label: "회사소개", href: "#about", subItems: aboutMenuItems },
+  { label: "제품정보", href: "#products", subItems: productMenuItems },
+  { label: "기술현황", href: "/technology/process", subItems: technologyMenuItems },
+  { label: "고객지원", href: "#contact" }
+];
+
+const productCards = [
+  { title: "맞춤제작", summary: "고객 사양에 맞춘 광학 부품 제작", href: "/products/custom" },
+  { title: "COATING", summary: "E-beam 기반 광학 박막 코팅", href: "/products/coating" },
+  { title: "DICING", summary: "정밀 절단 및 규격 가공", href: "/products/dicing" }
 ];
 
 
@@ -65,21 +58,27 @@ export default function Home() {
           </a>
 
           <nav className="desktop-nav" aria-label="Primary navigation">
-            {navItems.map(([label, href]) =>
-              label === "ABOUT US" ? (
-                <div className="nav-dropdown" key={href}>
-                  <a href={href}>{label}</a>
+            {navItems.map((item) =>
+              item.subItems ? (
+                <div className="nav-dropdown" key={item.href}>
+                  <a href={item.href}>{item.label}</a>
                   <div className="nav-dropdown-menu">
-                    {aboutMenuItems.map(([itemLabel, itemHref]) => (
-                      <Link key={itemHref} href={itemHref}>
-                        {itemLabel}
-                      </Link>
-                    ))}
+                    {item.subItems.map(([itemLabel, itemHref]) =>
+                      itemHref.startsWith("#") ? (
+                        <a key={itemHref} href={itemHref}>
+                          {itemLabel}
+                        </a>
+                      ) : (
+                        <Link key={itemHref} href={itemHref}>
+                          {itemLabel}
+                        </Link>
+                      )
+                    )}
                   </div>
                 </div>
               ) : (
-                <a key={href} href={href}>
-                  {label}
+                <a key={item.href} href={item.href}>
+                  {item.label}
                 </a>
               )
             )}
@@ -92,18 +91,24 @@ export default function Home() {
         </div>
 
         <nav className={`mobile-nav ${menuOpen ? "is-open" : ""}`} aria-label="Mobile navigation">
-          {navItems.map(([label, href]) => (
-            <div className="mobile-nav-group" key={href}>
-              <a href={href} onClick={() => setMenuOpen(false)}>
-                {label}
+          {navItems.map((item) => (
+            <div className="mobile-nav-group" key={item.href}>
+              <a href={item.href} onClick={() => setMenuOpen(false)}>
+                {item.label}
               </a>
-              {label === "ABOUT US" ? (
+              {item.subItems ? (
                 <div className="mobile-subnav">
-                  {aboutMenuItems.map(([itemLabel, itemHref]) => (
-                    <Link key={itemHref} href={itemHref} onClick={() => setMenuOpen(false)}>
-                      {itemLabel}
-                    </Link>
-                  ))}
+                  {item.subItems.map(([itemLabel, itemHref]) =>
+                    itemHref.startsWith("#") ? (
+                      <a key={itemHref} href={itemHref} onClick={() => setMenuOpen(false)}>
+                        {itemLabel}
+                      </a>
+                    ) : (
+                      <Link key={itemHref} href={itemHref} onClick={() => setMenuOpen(false)}>
+                        {itemLabel}
+                      </Link>
+                    )
+                  )}
                 </div>
               ) : null}
             </div>
@@ -119,11 +124,6 @@ export default function Home() {
               <p>ENGINEERING OPTICAL EXCELLENCE</p>
               <h1>MYUNG IN OPTICS</h1>
               <strong>광학 미러, 필터, 윈도우, 프리즘, 코팅 제품을 정밀 설비와 양산 검증 데이터로 완성합니다.</strong>
-              <div className="hero-tags" aria-label="product keywords">
-                {heroTags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
               <div className="hero-actions">
                 <a href="#products">제품 보기</a>
                 <a href="#contact">문의하기</a>
@@ -157,69 +157,26 @@ export default function Home() {
           <div className="section-inner">
             <div className="section-heading">
               <div className="product-label-stack">
-                <p className="section-kicker">PRODUCT</p>
-                <span>Coating</span>
+                <p className="section-kicker">PRODUCTS</p>
+                <span>Products</span>
               </div>
               <h2 className="product-heading">
-                <span>Optical Mirror · Filter · Window · Prism ·</span>
+                <span>맞춤제작 · COATING · DICING</span>
               </h2>
             </div>
             <div className="product-grid">
-              {productCards.map((card) => (
-                <article className="product-card" key={card.title}>
+              {productCards.map((card, index) => (
+                <article className="product-card product-card--simple" key={card.title}>
                   <Link href={card.href}>
-                    <div className={`product-image${card.fit === "contain" ? " product-image--contain" : ""}`}>
-                      <Image src={card.image} alt={card.title} fill sizes="(max-width: 760px) 100vw, 25vw" />
-                    </div>
                     <div className="product-copy">
-                      <span>PRODUCT</span>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
                       <h3>{card.title}</h3>
-                      <p>자세히 보기</p>
+                      <p>{card.summary}</p>
                     </div>
                   </Link>
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="capability-section" id="technology">
-          <div className="section-inner capability-grid capability-grid--processes">
-            <div className="capability-copy">
-              <p className="section-kicker">TECHNOLOGY</p>
-              <h2>Coating과 Dicing 중심의 정밀 공정</h2>
-              <div className="technology-processes">
-                {technologyProcesses.map((process) => (
-                  <article className="technology-process" key={process.title}>
-                    {process.image ? (
-                      <div className="technology-process-photo">
-                        <Image src={process.image} alt={`${process.title} process equipment`} fill sizes="(max-width: 760px) 100vw, 24vw" />
-                      </div>
-                    ) : null}
-                    <span>{process.title}</span>
-                    <p>{process.description}</p>
-                    <ul>
-                      {process.steps.map((step) => (
-                        <li key={step}>{step}</li>
-                      ))}
-                    </ul>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="quality-section" id="what-we-do">
-          <div className="section-inner quality-grid">
-            <div>
-              <p className="section-kicker">WHAT WE DO</p>
-              <h2>정밀 가공부터 코팅 검증까지 연결된 공정</h2>
-            </div>
-            <Link className="quality-photo quality-photo-link" href="/what-we-do" aria-label="View What We Do detail">
-              <Image src="/assets/what-we-do-processes-no-labels.jpg" alt="Dicing and E-beam coating process" fill sizes="(max-width: 900px) 100vw, 48vw" />
-              <span>공정 상세 보기</span>
-            </Link>
           </div>
         </section>
 

@@ -37,7 +37,7 @@ const pages = [
       { title: "기술혁신형 중소기업 확인서", image: "/assets/certificates/inno-biz-confirmation-clean.jpg" }
     ],
     mapImage: "",
-    footer: "Verified certification documents and records."
+    footer: "인증서 원본 자료는 고객 요청 및 프로젝트 조건에 따라 확인 후 제출할 수 있습니다."
   },
   {
     slug: "location",
