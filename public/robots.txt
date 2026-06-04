@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mio2008.com/sitemap.xml
+Sitemap: https://www.mio2008.com/sitemap.xml
