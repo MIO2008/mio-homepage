@@ -2,6 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+type Certificate = {
+  title: string;
+  image: string;
+};
+
+type TechnologyPage = {
+  slug: string;
+  label: string;
+  title: string;
+  summary: string;
+  points: string[];
+  certificates?: Certificate[];
+  image?: string;
+  imageAlt?: string;
+};
+
 const certificates = [
   { title: "DNV Management System Certificate", image: "/assets/certificates/dnv-management-system-clean.jpg" },
   { title: "LGE Green Program Certificate", image: "/assets/certificates/lge-green-program-clean.jpg" },
@@ -12,13 +28,15 @@ const certificates = [
   { title: "기술혁신형 중소기업 확인서", image: "/assets/certificates/inno-biz-confirmation-clean.jpg" }
 ];
 
-const technologyPages = [
+const technologyPages: TechnologyPage[] = [
   {
     slug: "custom-production",
     label: "맞춤제작",
     title: "고객 사양 기반 맞춤제작",
     summary: "광학 성능, 크기, 소재, 후공정 조건을 검토해 목적에 맞는 제작 방향을 제안합니다.",
-    points: ["요구 사양 검토", "공정 조건 설계", "샘플 및 양산 대응"]
+    points: ["요구 사양 검토", "공정 조건 설계", "샘플 및 양산 대응"],
+    image: "/assets/custom-production-process.png",
+    imageAlt: "COATING and DICING customized process overview"
   },
   {
     slug: "process",
@@ -81,6 +99,8 @@ export default async function TechnologyDetailPage({ params }: TechnologyPagePro
     notFound();
   }
 
+  const isVisualPage = Boolean(page.image);
+
   return (
     <main className="info-page">
       <header className="detail-header">
@@ -92,36 +112,46 @@ export default async function TechnologyDetailPage({ params }: TechnologyPagePro
         </Link>
       </header>
 
-      <section className="info-hero">
-        <p className="section-kicker">TECHNOLOGY</p>
-        <h1>{page.title}</h1>
-        <p>{page.summary}</p>
-      </section>
-
-      <section className="info-content">
-        <div className="detail-lists">
-          <section>
-            <h2>주요 내용</h2>
-            <ul>
-              {page.points.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-          </section>
-        </div>
-        {page.certificates ? (
-          <div className="certificate-grid">
-            {page.certificates.map((certificate) => (
-              <article className="certificate-card" key={certificate.title}>
-                <div className="certificate-image">
-                  <Image src={certificate.image} alt={certificate.title} fill sizes="(max-width: 760px) 100vw, 45vw" />
-                </div>
-                <h2>{certificate.title}</h2>
-              </article>
-            ))}
+      {isVisualPage ? (
+        <section className="technology-visual-page">
+          <div className="technology-visual">
+            <Image src={page.image!} alt={page.imageAlt ?? page.title} fill priority sizes="(max-width: 1180px) 100vw, 1180px" />
           </div>
-        ) : null}
-      </section>
+        </section>
+      ) : (
+        <>
+          <section className="info-hero">
+            <p className="section-kicker">TECHNOLOGY</p>
+            <h1>{page.title}</h1>
+            <p>{page.summary}</p>
+          </section>
+
+          <section className="info-content">
+            <div className="detail-lists">
+              <section>
+                <h2>주요 내용</h2>
+                <ul>
+                  {page.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+            {page.certificates ? (
+              <div className="certificate-grid">
+                {page.certificates.map((certificate) => (
+                  <article className="certificate-card" key={certificate.title}>
+                    <div className="certificate-image">
+                      <Image src={certificate.image} alt={certificate.title} fill sizes="(max-width: 760px) 100vw, 45vw" />
+                    </div>
+                    <h2>{certificate.title}</h2>
+                  </article>
+                ))}
+              </div>
+            ) : null}
+          </section>
+        </>
+      )}
     </main>
   );
 }

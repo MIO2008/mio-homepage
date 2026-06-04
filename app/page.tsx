@@ -186,7 +186,8 @@ export default function Home() {
             <div className="contact-box">
               <strong>+82-31-377-6254</strong>
               <a href="mailto:mio2008@naver.com">mio2008@naver.com</a>
-              <p>MIO MYUNG IN Optics CO.,LTD.</p>
+              <p className="contact-company">(주)명인</p>
+              <p className="contact-address">주소 : 경기도 내삼미동 733-5 (주) 명인</p>
             </div>
           </div>
         </section>

@@ -933,6 +933,17 @@ h2 {
   color: var(--muted);
 }
 
+.contact-box .contact-company {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.contact-box .contact-address {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
 .product-detail-page {
   min-height: 100vh;
   background: var(--soft);
@@ -1044,6 +1055,26 @@ h2 {
 .detail-lists li {
   color: var(--muted);
   font-size: 14px;
+}
+
+.technology-visual-page {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 44px 0 92px;
+}
+
+.technology-visual {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid rgba(16, 24, 38, 0.1);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 18px 44px rgba(16, 24, 38, 0.08);
+}
+
+.technology-visual img {
+  object-fit: contain;
 }
 
 .info-page {
