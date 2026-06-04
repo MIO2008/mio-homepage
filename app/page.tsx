@@ -160,9 +160,6 @@ export default function Home() {
                 <p className="section-kicker">PRODUCTS</p>
                 <span>Products</span>
               </div>
-              <h2 className="product-heading">
-                <span>맞춤제작 · COATING · DICING</span>
-              </h2>
             </div>
             <div className="product-grid">
               {productCards.map((card, index) => (
