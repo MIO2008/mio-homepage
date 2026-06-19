@@ -17,11 +17,11 @@ const notoSansKr = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: "MIO MYUNG IN Optics CO.,LTD.",
-  description: "MIO OPTICS specializes in optical filters, coating, dicing, optical mirrors, prisms and precision optical components for industrial applications.",
+  description: "주식회사 명인은 E-Beam 광학코팅, Glass Dicing, 광학필터 및 정밀 광학부품 제조 전문기업입니다.",
   keywords: ["MIO", "MYUNG IN Optics", "optical filter", "optical mirror", "optical coating", "prism", "optical window"],
   openGraph: {
     title: "MIO MYUNG IN Optics CO.,LTD.",
-    description: "Precision optical components, coating and assembly.",
+    description: "주식회사 명인은 E-Beam 광학코팅, Glass Dicing, 광학필터 및 정밀 광학부품 제조 전문기업입니다.",
     type: "website"
   }
 };
