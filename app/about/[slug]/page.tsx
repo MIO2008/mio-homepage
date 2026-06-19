@@ -71,8 +71,10 @@ export async function generateMetadata({ params }: AboutPageProps) {
     return {};
   }
 
+  const pageTitle = slug === "greeting" ? "회사소개 | 주식회사 명인" : `${page.label} | MIO MYUNG IN Optics CO.,LTD.`;
+
   return {
-    title: `${page.label} | MIO MYUNG IN Optics CO.,LTD.`,
+    title: pageTitle,
     description: page.lead
   };
 }

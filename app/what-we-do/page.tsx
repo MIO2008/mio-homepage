@@ -32,7 +32,7 @@ const processSteps = [
 ];
 
 export const metadata = {
-  title: "What We Do | MIO MYUNG IN Optics CO.,LTD.",
+  title: "광학코팅 및 Glass Dicing 서비스 | 주식회사 명인",
   description: "Dicing, E-beam coating, and optical performance process overview."
 };
 
