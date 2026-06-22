@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import LanguageSwitcher from "../../components/LanguageSwitcher";
+import { SITE_URL } from "../../content/site";
 
 const products = [
   {
@@ -61,6 +63,11 @@ const products = [
   }
 ];
 
+const productLanguageRoutes: Record<string, { ko: string; en: string }> = {
+  coating: { ko: "/products/coating", en: "/en/coating" },
+  dicing: { ko: "/products/dicing", en: "/en/dicing" }
+};
+
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -79,7 +86,18 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
   return {
     title: `${product.title} | MIO MYUNG IN Optics CO.,LTD.`,
-    description: product.summary
+    description: product.summary,
+    alternates: productLanguageRoutes[slug]
+      ? {
+          canonical: `${SITE_URL}${productLanguageRoutes[slug].ko}`,
+          languages: {
+            ko: `${SITE_URL}${productLanguageRoutes[slug].ko}`,
+            en: `${SITE_URL}${productLanguageRoutes[slug].en}`
+          }
+        }
+      : {
+          canonical: `${SITE_URL}/products/${slug}`
+        }
   };
 }
 
@@ -97,9 +115,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <Link className="detail-brand" href="/">
           MiO
         </Link>
-        <Link className="detail-back" href="/#products">
-          Product
-        </Link>
+        <div className="detail-header-actions">
+          <Link className="detail-back" href="/#products">
+            Product
+          </Link>
+          <LanguageSwitcher current="ko" koHref={`/products/${slug}`} enHref={productLanguageRoutes[slug]?.en ?? "/en"} />
+        </div>
       </header>
 
       <section className="detail-hero">

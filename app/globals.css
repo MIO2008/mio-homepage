@@ -85,11 +85,46 @@ button {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 46px;
+  gap: 34px;
   color: var(--navy);
   font-family: var(--font-inter), Arial, sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
+}
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.language-switcher {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 6px 11px;
+  color: var(--muted);
+  font-family: var(--font-inter), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.language-switcher a {
+  padding: 0;
+}
+
+.language-switcher a[aria-current="page"] {
+  color: var(--navy);
+}
+
+.language-switcher span {
+  color: #c8ced6;
 }
 
 .desktop-nav a {
@@ -536,6 +571,11 @@ h2 {
   background: transparent;
 }
 
+.product-grid--two {
+  max-width: 760px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .product-card {
   overflow: hidden;
   border: 1px solid rgba(68, 198, 231, 0.22);
@@ -958,6 +998,16 @@ h2 {
   margin: 0 auto;
 }
 
+.detail-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-header .language-switcher {
+  background: var(--white);
+}
+
 .detail-brand {
   color: transparent;
   background: linear-gradient(120deg, #6736a4, #2861b6 60%, #1aa9c7);
@@ -1239,6 +1289,13 @@ h2 {
     display: none;
   }
 
+  .language-switcher {
+    min-height: 32px;
+    gap: 7px;
+    padding: 6px 9px;
+    font-size: 12px;
+  }
+
   .menu-button {
     display: block;
   }
@@ -1319,6 +1376,10 @@ h2 {
     background: transparent;
   }
 
+  .product-grid--two {
+    max-width: none;
+  }
+
   .product-card:hover {
     transform: none;
   }
@@ -1347,6 +1408,28 @@ h2 {
 }
 
 @media (max-width: 540px) {
+  .header-tools {
+    gap: 8px;
+  }
+
+  .detail-header {
+    height: auto;
+    min-height: 70px;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .detail-header-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .detail-back {
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
   .main-visual {
     min-height: 560px;
   }

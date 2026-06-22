@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import LanguageSwitcher from "../../components/LanguageSwitcher";
+import { SITE_URL } from "../../content/site";
 
 const pages = [
   {
@@ -75,7 +77,19 @@ export async function generateMetadata({ params }: AboutPageProps) {
 
   return {
     title: pageTitle,
-    description: page.lead
+    description: page.lead,
+    alternates:
+      slug === "greeting"
+        ? {
+            canonical: `${SITE_URL}/about/greeting`,
+            languages: {
+              ko: `${SITE_URL}/about/greeting`,
+              en: `${SITE_URL}/en/about`
+            }
+          }
+        : {
+            canonical: `${SITE_URL}/about/${slug}`
+          }
   };
 }
 
@@ -93,9 +107,12 @@ export default async function AboutDetailPage({ params }: AboutPageProps) {
         <Link className="detail-brand" href="/">
           MiO
         </Link>
-        <Link className="detail-back" href="/#about">
-          ABOUT US
-        </Link>
+        <div className="detail-header-actions">
+          <Link className="detail-back" href="/#about">
+            ABOUT US
+          </Link>
+          <LanguageSwitcher current="ko" koHref={`/about/${slug}`} enHref="/en/about" />
+        </div>
       </header>
 
       <section className={`info-hero${page.certificates.length > 0 ? " info-hero--wide" : ""}`}>
