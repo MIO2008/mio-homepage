@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
+import ServiceDetail from "../../components/ServiceDetail";
 import { englishDetailPages, getEnglishDetailPage, SITE_URL } from "../../content/site";
 
 type EnglishPageProps = {
@@ -47,6 +48,9 @@ export async function generateMetadata({ params }: EnglishPageProps): Promise<Me
 
 export default async function EnglishDetailPage({ params }: EnglishPageProps) {
   const { slug } = await params;
+  if (slug === "coating" || slug === "dicing") {
+    return <ServiceDetail slug={slug} english />;
+  }
   const page = getEnglishDetailPage(slug);
 
   if (!page) {

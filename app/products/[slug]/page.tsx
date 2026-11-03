@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
+import ServiceDetail from "../../components/ServiceDetail";
 import { SITE_URL } from "../../content/site";
 
 const products = [
@@ -103,6 +104,9 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
+  if (slug === "coating" || slug === "dicing") {
+    return <ServiceDetail slug={slug} />;
+  }
   const product = products.find((item) => item.slug === slug);
 
   if (!product) {
