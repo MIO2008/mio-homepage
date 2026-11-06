@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SITE_URL } from "../../content/site";
 
 type Certificate = {
   title: string;
@@ -87,7 +88,8 @@ export async function generateMetadata({ params }: TechnologyPageProps) {
 
   return {
     title: `${page.label} | MIO MYUNG IN Optics CO.,LTD.`,
-    description: page.summary
+    description: page.summary,
+    alternates: { canonical: `${SITE_URL}/technology/${slug}/` }
   };
 }
 

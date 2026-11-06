@@ -88,6 +88,14 @@ export async function generateMetadata({ params }: ProductPageProps) {
   return {
     title: `${product.title} | MIO MYUNG IN Optics CO.,LTD.`,
     description: product.summary,
+    openGraph: {
+      title: `${product.title} | MIO MYUNG IN Optics CO.,LTD.`,
+      description: product.summary,
+      url: `${SITE_URL}/products/${slug}/`,
+      type: "website",
+      locale: "ko_KR",
+      images: [{ url: product.image, alt: product.title }]
+    },
     alternates: productLanguageRoutes[slug]
       ? {
           canonical: `${SITE_URL}${productLanguageRoutes[slug].ko}`,
