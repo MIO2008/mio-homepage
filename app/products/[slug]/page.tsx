@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "../../components/SiteHeader";
 import ServiceDetail from "../../components/ServiceDetail";
+import { languagePairs } from "../../content/english-pages";
 import { SITE_URL } from "../../content/site";
 
 const products = [
@@ -97,7 +98,8 @@ export async function generateMetadata({ params }: ProductPageProps) {
           }
         }
       : {
-          canonical: `${SITE_URL}/products/${slug}`
+          canonical: `${SITE_URL}/products/${slug}`,
+          languages: { ko: `${SITE_URL}/products/${slug}`, en: `${SITE_URL}${languagePairs[`/products/${slug}`]}` }
         }
   };
 }

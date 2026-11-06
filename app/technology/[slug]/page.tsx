@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { languagePairs } from "../../content/english-pages";
 import Facilities from "../../components/Facilities";
 import SiteHeader from "../../components/SiteHeader";
 import { notFound } from "next/navigation";
@@ -89,6 +90,7 @@ export async function generateMetadata({ params }: TechnologyPageProps) {
   return {
     title: `${page.label} | MIO MYUNG IN Optics CO.,LTD.`,
     ...(["equipment", "measurement"].includes(slug) ? { alternates: { canonical: "/technology/equipment/" } } : {}),
+    alternates: { canonical: `/technology/${slug === "measurement" ? "equipment" : slug}/`, languages: { ko: `/technology/${slug === "measurement" ? "equipment" : slug}/`, en: `${languagePairs[`/technology/${slug}`]}/` } },
     description: page.summary
   };
 }

@@ -15,7 +15,7 @@ export default function SiteHome({ content }: SiteHomeProps) {
     <>
       <SiteHeader content={content} home />
 
-      <main id="top">
+      <main id="top" lang={content.currentLanguage}>
         <section className="main-visual" aria-label="MIO main visual">
           <Image src="/assets/mio-hero-no-focus.png" alt={content.hero.imageAlt} fill priority sizes="100vw" />
           <div className="visual-inner">
