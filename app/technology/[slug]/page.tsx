@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Facilities from "../../components/Facilities";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -47,9 +48,9 @@ const technologyPages: TechnologyPage[] = [
   },
   {
     slug: "equipment",
-    label: "보유설비",
-    title: "보유설비",
-    summary: "광학 박막 코팅과 정밀 절단을 위한 주요 생산 설비를 운영합니다.",
+    label: "설비현황",
+    title: "설비현황",
+    summary: "가공 설비, E-BEAM 코팅 설비, 측정 설비 및 초음파 세척기를 소개합니다.",
     points: ["E-beam coating equipment", "Dicing system", "Process support equipment"]
   },
   {
@@ -87,6 +88,7 @@ export async function generateMetadata({ params }: TechnologyPageProps) {
 
   return {
     title: `${page.label} | MIO MYUNG IN Optics CO.,LTD.`,
+    ...(["equipment", "measurement"].includes(slug) ? { alternates: { canonical: "/technology/equipment/" } } : {}),
     description: page.summary
   };
 }
@@ -97,6 +99,10 @@ export default async function TechnologyDetailPage({ params }: TechnologyPagePro
 
   if (!page) {
     notFound();
+  }
+
+  if (slug === "equipment" || slug === "measurement") {
+    return <Facilities initialCategory={slug === "measurement" ? "measure" : "process"} />;
   }
 
   const isVisualPage = Boolean(page.image);

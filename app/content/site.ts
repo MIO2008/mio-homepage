@@ -101,8 +101,7 @@ export const koHomeContent: HomeContent = {
       subItems: [
         ["맞춤제작", "/technology/custom-production"],
         ["생산공정", "/technology/process"],
-        ["보유설비", "/technology/equipment"],
-        ["측정설비", "/technology/measurement"]
+        ["설비현황", "/technology/equipment"]
       ]
     },
     { label: "고객지원", href: "#contact" }

@@ -25,7 +25,6 @@ const routes = [
   { path: "/technology/custom-production", priority: 0.8 },
   { path: "/technology/process", priority: 0.7 },
   { path: "/technology/equipment", priority: 0.7 },
-  { path: "/technology/measurement", priority: 0.7 },
   { path: "/technology/certificates", priority: 0.6 }
 ];
 
