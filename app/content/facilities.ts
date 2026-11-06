@@ -54,7 +54,7 @@ export const facilities = {
   "coat": [
     {
       "alt": "빨간 띠 진공 코팅기",
-      "title": "E-BEAM 증착 설비 (Ø1,200 mm)",
+      "title": "E-BEAM 증착 설비 (Ø1,200)",
       "en": "Electron Beam Evaporation System",
       "copy": "전자빔 증착 방식으로 기판 표면에 광학 박막을 형성하는 설비입니다.",
       "image": "/assets/facilities/coat-1.webp",
@@ -63,7 +63,7 @@ export const facilities = {
     },
     {
       "alt": "왼쪽 제어반 진공 코팅기",
-      "title": "E-BEAM 증착기 (Ø1,350 mm)",
+      "title": "E-BEAM 증착기 (Ø1,350)",
       "en": "Electron Beam Evaporation System",
       "copy": "전자빔 증착 방식으로 기판 표면에 광학 박막을 형성하는 설비입니다.",
       "image": "/assets/facilities/coat-2.webp",
@@ -72,12 +72,21 @@ export const facilities = {
     },
     {
       "alt": "오른쪽 제어반 진공 코팅기",
-      "title": "E-BEAM 증착기 (Ø1,350 mm)",
+      "title": "E-BEAM 증착기 (Ø1,350)",
       "en": "Electron Beam Evaporation System",
       "copy": "전자빔 증착 방식으로 기판 표면에 광학 박막을 형성하는 설비입니다.",
       "image": "/assets/facilities/coat-3.webp",
       "width": 800,
       "height": 450
+    },
+    {
+      "alt": "초록색 E-BEAM 증착 설비 1호기",
+      "title": "E-BEAM 증착 설비 (Ø1,200)",
+      "en": "Electron Beam Evaporation System",
+      "copy": "전자빔 증착 방식으로 기판 표면에 광학 박막을 형성하는 설비입니다.",
+      "image": "/assets/facilities/coat-4.webp",
+      "width": 1000,
+      "height": 563
     }
   ],
   "measure": [
