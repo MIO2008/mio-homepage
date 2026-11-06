@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { facilities } from "../content/facilities";
-import { koHomeContent } from "../content/site";
+import SiteHeader from "./SiteHeader";
 import styles from "./Facilities.module.css";
 
 const categories = [
@@ -18,7 +18,6 @@ type Equipment = { title: string; alt: string; image: string; width: number; hei
 
 export default function Facilities({ initialCategory = "process" }: { initialCategory?: Category }) {
   const [selected, setSelected] = useState<Category>(initialCategory);
-  const [menuOpen, setMenuOpen] = useState(false);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   useEffect(() => {
     const sync = () => {
@@ -32,19 +31,8 @@ export default function Facilities({ initialCategory = "process" }: { initialCat
     setSelected(id);
     window.history.replaceState(null, "", `#${id}`);
   }
-  const navHref = (href: string) => href.startsWith("#") ? `/${href}` : href;
   return <div className={styles.page}>
-    <header className={styles.header}>
-      <div className={styles.headerInner}>
-        <Link href="/" className="brand" aria-label="명인 홈페이지"><span className="brand-mark">MiO</span><span className="brand-sub">MYUNG IN OPTICS</span></Link>
-        <nav className={styles.desktopNav} aria-label="주 메뉴">{koHomeContent.navItems.map(item => item.subItems ? <div className={styles.dropdown} key={item.label}>
-          <Link href={navHref(item.href)} className={item.label === "기술현황" ? styles.current : undefined}>{item.label}</Link>
-          <div className={styles.dropdownMenu}>{item.subItems.map(([label, href]) => <Link key={href} href={navHref(href)} aria-current={href === "/technology/equipment" ? "page" : undefined}>{label}</Link>)}</div>
-        </div> : <Link key={item.label} href={navHref(item.href)}>{item.label}</Link>)}</nav>
-        <button type="button" className={styles.menuButton} aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"} aria-expanded={menuOpen} aria-controls="facilities-mobile-nav" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "닫기 ×" : "메뉴 ☰"}</button>
-      </div>
-      <nav id="facilities-mobile-nav" className={styles.mobileNav} aria-label="모바일 메뉴" hidden={!menuOpen}>{koHomeContent.navItems.map(item => <div key={item.label}><Link href={navHref(item.href)} onClick={() => setMenuOpen(false)}>{item.label}</Link>{item.subItems?.map(([label, href]) => <Link key={href} href={navHref(href)} onClick={() => setMenuOpen(false)} aria-current={href === "/technology/equipment" ? "page" : undefined}>{label}</Link>)}</div>)}</nav>
-    </header>
+    <SiteHeader koHref="/technology/equipment/" />
     <main>
       <section className={styles.hero}><div className={styles.wrap}><div className={styles.crumb}><Link href="/">HOME</Link><span>/</span><Link href="/technology/process/">기술현황</Link><span>/</span><span>설비현황</span></div><p className={styles.eyebrow}>OUR FACILITIES</p><h1>설비현황</h1><p className={styles.lead}>가공부터 코팅, 측정, 세척까지.<br />명인의 주요 설비를 공정별로 소개합니다.</p></div></section>
       <div className={`${styles.wrap} ${styles.content}`}>

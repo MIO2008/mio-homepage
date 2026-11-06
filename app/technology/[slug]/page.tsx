@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Facilities from "../../components/Facilities";
-import Link from "next/link";
+import SiteHeader from "../../components/SiteHeader";
 import { notFound } from "next/navigation";
 
 type Certificate = {
@@ -109,14 +109,7 @@ export default async function TechnologyDetailPage({ params }: TechnologyPagePro
 
   return (
     <main className="info-page">
-      <header className="detail-header">
-        <Link className="detail-brand" href="/">
-          MiO
-        </Link>
-        <Link className="detail-back" href="/">
-          기술현황
-        </Link>
-      </header>
+      <SiteHeader koHref={`/technology/${slug}`} />
 
       {isVisualPage ? (
         <section className="technology-visual-page">

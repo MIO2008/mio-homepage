@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import LanguageSwitcher from "../../components/LanguageSwitcher";
+import SiteHeader from "../../components/SiteHeader";
 import ServiceDetail from "../../components/ServiceDetail";
 import { SITE_URL } from "../../content/site";
 
@@ -115,17 +115,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   return (
     <main className="product-detail-page">
-      <header className="detail-header">
-        <Link className="detail-brand" href="/">
-          MiO
-        </Link>
-        <div className="detail-header-actions">
-          <Link className="detail-back" href="/#products">
-            Product
-          </Link>
-          <LanguageSwitcher current="ko" koHref={`/products/${slug}`} enHref={productLanguageRoutes[slug]?.en ?? "/en"} />
-        </div>
-      </header>
+      <SiteHeader koHref={`/products/${slug}`} enHref={productLanguageRoutes[slug]?.en ?? "/en"} />
 
       <section className="detail-hero">
         <div className="detail-media">

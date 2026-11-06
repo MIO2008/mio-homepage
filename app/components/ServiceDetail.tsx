@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import LanguageSwitcher from "./LanguageSwitcher";
+import SiteHeader from "./SiteHeader";
 import styles from "./ServiceDetail.module.css";
 import CoatingServices from "./CoatingServices";
 
@@ -16,8 +16,9 @@ export default function ServiceDetail({ slug, english = false }: { slug: "coatin
   const inputs = english ? (coating ? ["Material", "Dimensions", "Wavelength", "Optical targets", "Quantity", "Drawing"] : ["Material", "Original size & thickness", "Final dimensions", "Tolerance", "Quantity", "Drawing"]) : (coating ? ["소재", "부품 크기", "사용 파장", "목표 특성", "수량", "도면"] : ["소재", "원판 크기·두께", "완성 치수", "요구 공차", "수량", "도면"]);
   const image = `/assets/technology-${slug}-equipment.jpg`;
   return <main className={styles.page} lang={english ? "en" : "ko"}>
-    <header className={styles.header}><div className={styles.bar}><Link className={styles.logo} href={english ? "/en" : "/"}>MiO<small>MYUNG IN OPTICS</small></Link><nav aria-label="Products">{["coating", "dicing"].map(item => <Link key={item} href={`${root}/${item}`} aria-current={item === slug ? "page" : undefined}>{item.toUpperCase()}</Link>)}</nav><LanguageSwitcher current={english ? "en" : "ko"} koHref={`/products/${slug}`} enHref={`/en/${slug}`} /></div></header>
+    <SiteHeader english={english} koHref={`/products/${slug}`} enHref={`/en/${slug}`} />
     <div className={`${styles.wrap} ${styles.crumb}`}>MIO OPTICS / PRODUCTS / {name}</div>
+    <nav className={styles.serviceTabs} aria-label={english ? "Service categories" : "제품 분류"}>{["coating", "dicing"].map(item => <Link key={item} href={`${root}/${item}`} aria-current={item === slug ? "page" : undefined}>{item.toUpperCase()}</Link>)}</nav>
     <section className={styles.hero}><Image src={image} alt={title} fill priority sizes="100vw" /><div className={styles.wrap}><p className={styles.eyebrow}>PRECISION OPTICAL SOLUTIONS</p><h1>{name}<span>{title}</span></h1><p className={styles.lead}>{description}</p><a className={styles.cta} href="#service-contact">{english ? "Discuss your project" : `${coating ? "코팅" : "다이싱"} 문의하기`} ↗</a></div></section>
     <div className={styles.facts}><div className={`${styles.wrap} ${styles.factgrid}`}>{facts.map((fact, i) => <div key={fact}><small>0{i + 1}</small><strong>{fact}</strong></div>)}</div></div>
     {coating && !english ? <CoatingServices /> : (

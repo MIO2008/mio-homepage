@@ -2,100 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import type { HomeContent, NavItem } from "../content/site";
-import LanguageSwitcher from "./LanguageSwitcher";
+import type { HomeContent } from "../content/site";
+import SiteHeader from "./SiteHeader";
 
 type SiteHomeProps = {
   content: HomeContent;
 };
 
-function NavLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => void }) {
-  if (item.href.startsWith("#")) {
-    return (
-      <a href={item.href} onClick={onNavigate}>
-        {item.label}
-      </a>
-    );
-  }
-
-  return (
-    <Link href={item.href} onClick={onNavigate}>
-      {item.label}
-    </Link>
-  );
-}
-
 export default function SiteHome({ content }: SiteHomeProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
-      <header className="site-header">
-        <div className="header-inner">
-          <a className="brand" href="#top" aria-label="MIO MYUNG IN OPTICS" onClick={closeMenu}>
-            <span className="brand-mark">MiO</span>
-            <span className="brand-sub">MYUNG IN OPTICS</span>
-          </a>
-
-          <nav className="desktop-nav" aria-label="Primary navigation">
-            {content.navItems.map((item) =>
-              item.subItems ? (
-                <div className="nav-dropdown" key={item.href}>
-                  <NavLink item={item} />
-                  <div className="nav-dropdown-menu">
-                    {item.subItems.map(([itemLabel, itemHref]) =>
-                      itemHref.startsWith("#") ? (
-                        <a key={itemHref} href={itemHref}>
-                          {itemLabel}
-                        </a>
-                      ) : (
-                        <Link key={itemHref} href={itemHref}>
-                          {itemLabel}
-                        </Link>
-                      )
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <NavLink item={item} key={item.href} />
-              )
-            )}
-          </nav>
-
-          <div className="header-tools">
-            <LanguageSwitcher current={content.currentLanguage} koHref={content.languageHrefs.ko} enHref={content.languageHrefs.en} onNavigate={closeMenu} />
-            <button className="menu-button" type="button" aria-label="Open menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>
-              <span />
-              <span />
-            </button>
-          </div>
-        </div>
-
-        <nav className={`mobile-nav ${menuOpen ? "is-open" : ""}`} aria-label="Mobile navigation">
-          {content.navItems.map((item) => (
-            <div className="mobile-nav-group" key={item.href}>
-              <NavLink item={item} onNavigate={closeMenu} />
-              {item.subItems ? (
-                <div className="mobile-subnav">
-                  {item.subItems.map(([itemLabel, itemHref]) =>
-                    itemHref.startsWith("#") ? (
-                      <a key={itemHref} href={itemHref} onClick={closeMenu}>
-                        {itemLabel}
-                      </a>
-                    ) : (
-                      <Link key={itemHref} href={itemHref} onClick={closeMenu}>
-                        {itemLabel}
-                      </Link>
-                    )
-                  )}
-                </div>
-              ) : null}
-            </div>
-          ))}
-        </nav>
-      </header>
+      <SiteHeader content={content} home />
 
       <main id="top">
         <section className="main-visual" aria-label="MIO main visual">

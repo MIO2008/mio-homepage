@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import LanguageSwitcher from "../../components/LanguageSwitcher";
+import SiteHeader from "../../components/SiteHeader";
 import ServiceDetail from "../../components/ServiceDetail";
 import { englishDetailPages, getEnglishDetailPage, SITE_URL } from "../../content/site";
 
@@ -60,17 +60,7 @@ export default async function EnglishDetailPage({ params }: EnglishPageProps) {
   if (page.kind === "about") {
     return (
       <main className="info-page">
-        <header className="detail-header">
-          <Link className="detail-brand" href="/en">
-            MiO
-          </Link>
-          <div className="detail-header-actions">
-            <Link className="detail-back" href="/en#about">
-              ABOUT US
-            </Link>
-            <LanguageSwitcher current="en" koHref={page.koHref} enHref="/en/about" />
-          </div>
-        </header>
+        <SiteHeader english koHref={page.koHref} enHref={`/en/${slug}`} />
 
         <section className="info-hero">
           <p className="section-kicker">ABOUT US</p>
@@ -89,17 +79,7 @@ export default async function EnglishDetailPage({ params }: EnglishPageProps) {
 
   return (
     <main className="product-detail-page">
-      <header className="detail-header">
-        <Link className="detail-brand" href="/en">
-          MiO
-        </Link>
-        <div className="detail-header-actions">
-          <Link className="detail-back" href="/en#products">
-            Product
-          </Link>
-          <LanguageSwitcher current="en" koHref={page.koHref} enHref={`/en/${page.slug}`} />
-        </div>
-      </header>
+      <SiteHeader english koHref={page.koHref} enHref={`/en/${slug}`} />
 
       <section className="detail-hero">
         <div className="detail-media">

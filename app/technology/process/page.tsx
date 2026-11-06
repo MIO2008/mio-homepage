@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./process.module.css";
+import SiteHeader from "../../components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "E-Beam 코팅 생산공정 | 주식회사 명인",
@@ -29,7 +30,7 @@ const phases = [
 
 export default function CoatingProcessPage() {
   return <main className={styles.page}>
-    <header className={styles.header}><div className={`${styles.wrap} ${styles.head}`}><Link className={styles.brand} href="/">MiO<small>MYUNG IN OPTICS</small></Link><Link href="/technology/equipment/">기술현황 / 보유설비</Link></div></header>
+    <SiteHeader koHref="/technology/process/" />
     <div className={styles.wrap}>
       <div className={styles.crumb}><Link href="/">HOME</Link> / TECHNOLOGY / PRODUCTION PROCESS</div>
       <section className={styles.intro}><p className={styles.eyebrow}>E-BEAM COATING PROCESS</p><h1>E-Beam 코팅 생산공정</h1><p>요구 사양 검토부터 코팅, 검사와 출하까지.</p></section>
