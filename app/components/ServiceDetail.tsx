@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LanguageSwitcher from "./LanguageSwitcher";
 import styles from "./ServiceDetail.module.css";
+import CoatingServices from "./CoatingServices";
 
 export default function ServiceDetail({ slug, english = false }: { slug: "coating" | "dicing"; english?: boolean }) {
   const coating = slug === "coating";
@@ -19,7 +20,9 @@ export default function ServiceDetail({ slug, english = false }: { slug: "coatin
     <div className={`${styles.wrap} ${styles.crumb}`}>MIO OPTICS / PRODUCTS / {name}</div>
     <section className={styles.hero}><Image src={image} alt={title} fill priority sizes="100vw" /><div className={styles.wrap}><p className={styles.eyebrow}>PRECISION OPTICAL SOLUTIONS</p><h1>{name}<span>{title}</span></h1><p className={styles.lead}>{description}</p><a className={styles.cta} href="#service-contact">{english ? "Discuss your project" : `${coating ? "코팅" : "다이싱"} 문의하기`} ↗</a></div></section>
     <div className={styles.facts}><div className={`${styles.wrap} ${styles.factgrid}`}>{facts.map((fact, i) => <div key={fact}><small>0{i + 1}</small><strong>{fact}</strong></div>)}</div></div>
+    {coating && !english ? <CoatingServices /> : (
     <section className={styles.band}><div className={`${styles.wrap} ${styles.intro}`}><div><p className={styles.eyebrow}>YOUR REQUIREMENTS</p><h2>{english ? (coating ? "The right coating starts with your optical requirements." : "Precision starts with the details.") : (coating ? "필요한 광학 성능에서 코팅의 방향을 찾습니다." : "작은 부품일수록 조건부터 꼼꼼하게.")}</h2><p className={styles.muted}>{description}</p></div><table className={styles.rows}><tbody>{rows.map(([label, text]) => <tr key={label}><th scope="row">{label}</th><td>{text}</td></tr>)}</tbody></table></div></section>
+    )}
     <section className={`${styles.band} ${styles.light}`}><div className={`${styles.wrap} ${styles.equipment}`}><Image src={image} alt={title} width={640} height={420} /><div><p className={styles.eyebrow}>EQUIPMENT &amp; PROCESS</p><h2>{english ? (coating ? "E-Beam coating for optical performance" : "Precision cutting and inspection") : (coating ? "광학 성능을 구현하는 E-Beam 코팅 공정" : "목적 규격을 위한 정밀 절단과 검사")}</h2><p className={styles.muted}>{english ? "Processing capabilities and verification requirements are discussed after reviewing your material and specifications." : (coating ? "진공 증착 기반의 광학 박막 코팅으로 투과와 반사 특성을 제어합니다. 목표 성능과 측정 조건은 사양 검토 단계에서 협의합니다." : "광학 및 전자 부품 소재를 요구 규격에 맞춰 가공하고 치수와 외관을 확인합니다. 구체적인 대응 범위는 소재와 도면 검토 후 협의합니다.")}</p></div></div></section>
     <section className={styles.band}><div className={styles.wrap}><p className={styles.eyebrow}>WORKFLOW</p><h2>{english ? "A process built around your requirements" : "요구 조건에서 시작하는 작업"}</h2><div className={styles.steps}>{steps.map(([label, text], i) => <article key={label}><span>0{i + 1}</span><h3>{label}</h3><p>{text}</p></article>)}</div></div></section>
     <section className={styles.contact} id="service-contact"><div className={styles.wrap}><div><p className={styles.eyebrow}>LET’S TALK</p><h2>{english ? "Send us your drawing and requirements." : "도면과 요구 조건을 함께 보내주세요."}</h2><p>{english ? "Include the following details to help us review your project." : "필요한 정보를 보내주시면 상담에 도움이 됩니다."}</p></div><div><ul className={styles.inputs}>{inputs.map(input => <li key={input}>{input}</li>)}</ul><a className={styles.mail} href={`mailto:mio2008@naver.com?subject=${encodeURIComponent(`${name} ${english ? "Inquiry" : "가공 문의"}`)}`}>mio2008@naver.com ↗</a><p><a href="tel:+82313776254">+82-31-377-6254</a></p></div></div></section>
