@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import LanguageSwitcher from "../../components/LanguageSwitcher";
+import SiteHeader from "../../components/SiteHeader";
+import { languagePairs } from "../../content/english-pages";
 import { SITE_URL } from "../../content/site";
 
 const pages = [
@@ -88,7 +89,8 @@ export async function generateMetadata({ params }: AboutPageProps) {
             }
           }
         : {
-            canonical: `${SITE_URL}/about/${slug}`
+            canonical: `${SITE_URL}/about/${slug}`,
+            languages: { ko: `${SITE_URL}/about/${slug}`, en: `${SITE_URL}${languagePairs[`/about/${slug}`]}` }
           }
   };
 }
@@ -103,17 +105,7 @@ export default async function AboutDetailPage({ params }: AboutPageProps) {
 
   return (
     <main className="info-page">
-      <header className="detail-header">
-        <Link className="detail-brand" href="/">
-          MiO
-        </Link>
-        <div className="detail-header-actions">
-          <Link className="detail-back" href="/#about">
-            ABOUT US
-          </Link>
-          <LanguageSwitcher current="ko" koHref={`/about/${slug}`} enHref="/en/about" />
-        </div>
-      </header>
+      <SiteHeader koHref={`/about/${slug}`} />
 
       <section className={`info-hero${page.certificates.length > 0 ? " info-hero--wide" : ""}`}>
         <p className="section-kicker">ABOUT US</p>

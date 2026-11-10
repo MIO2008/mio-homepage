@@ -1,7 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
+import { languagePairs } from "../../content/english-pages";
+import Facilities from "../../components/Facilities";
+import SiteHeader from "../../components/SiteHeader";
 import { notFound } from "next/navigation";
-import { SITE_URL } from "../../content/site";
 
 type Certificate = {
   title: string;
@@ -48,9 +49,9 @@ const technologyPages: TechnologyPage[] = [
   },
   {
     slug: "equipment",
-    label: "보유설비",
-    title: "보유설비",
-    summary: "광학 박막 코팅과 정밀 절단을 위한 주요 생산 설비를 운영합니다.",
+    label: "설비현황",
+    title: "설비현황",
+    summary: "가공 설비, E-BEAM 코팅 설비, 측정 설비 및 초음파 세척기를 소개합니다.",
     points: ["E-beam coating equipment", "Dicing system", "Process support equipment"]
   },
   {
@@ -88,8 +89,9 @@ export async function generateMetadata({ params }: TechnologyPageProps) {
 
   return {
     title: `${page.label} | MIO MYUNG IN Optics CO.,LTD.`,
-    description: page.summary,
-    alternates: { canonical: `${SITE_URL}/technology/${slug}/` }
+    ...(["equipment", "measurement"].includes(slug) ? { alternates: { canonical: "/technology/equipment/" } } : {}),
+    alternates: { canonical: `/technology/${slug === "measurement" ? "equipment" : slug}/`, languages: { ko: `/technology/${slug === "measurement" ? "equipment" : slug}/`, en: `${languagePairs[`/technology/${slug}`]}/` } },
+    description: page.summary
   };
 }
 
@@ -101,18 +103,15 @@ export default async function TechnologyDetailPage({ params }: TechnologyPagePro
     notFound();
   }
 
+  if (slug === "equipment" || slug === "measurement") {
+    return <Facilities initialCategory={slug === "measurement" ? "measure" : "process"} />;
+  }
+
   const isVisualPage = Boolean(page.image);
 
   return (
     <main className="info-page">
-      <header className="detail-header">
-        <Link className="detail-brand" href="/">
-          MiO
-        </Link>
-        <Link className="detail-back" href="/">
-          기술현황
-        </Link>
-      </header>
+      <SiteHeader koHref={`/technology/${slug}`} />
 
       {isVisualPage ? (
         <section className="technology-visual-page">

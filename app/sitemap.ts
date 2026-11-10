@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { englishExtraPages, languagePairs } from "./content/english-pages";
 import { SITE_URL } from "./content/site";
 
 export const dynamic = "force-static";
@@ -25,14 +26,13 @@ const routes = [
   { path: "/technology/custom-production", priority: 0.8 },
   { path: "/technology/process", priority: 0.7 },
   { path: "/technology/equipment", priority: 0.7 },
-  { path: "/technology/measurement", priority: 0.7 },
   { path: "/technology/certificates", priority: 0.6 }
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  return routes.map((route) => ({
+  return [...routes.map(route => ({...route, languages: route.languages ?? (languagePairs[route.path] ? { ko: route.path, en: languagePairs[route.path] } : undefined)})), ...englishExtraPages.map(page => ({path: `/en/${page.slug}`, priority: 0.7, languages: { ko: page.koHref, en: `/en/${page.slug}` }}))].map((route) => ({
     url: new URL(route.path, siteUrl).toString(),
     lastModified,
     changeFrequency: "monthly",

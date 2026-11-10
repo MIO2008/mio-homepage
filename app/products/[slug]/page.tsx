@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import LanguageSwitcher from "../../components/LanguageSwitcher";
+import SiteHeader from "../../components/SiteHeader";
 import ServiceDetail from "../../components/ServiceDetail";
+import { languagePairs } from "../../content/english-pages";
 import { SITE_URL } from "../../content/site";
 
 const products = [
@@ -105,7 +106,8 @@ export async function generateMetadata({ params }: ProductPageProps) {
           }
         }
       : {
-          canonical: `${SITE_URL}/products/${slug}`
+          canonical: `${SITE_URL}/products/${slug}`,
+          languages: { ko: `${SITE_URL}/products/${slug}`, en: `${SITE_URL}${languagePairs[`/products/${slug}`]}` }
         }
   };
 }
@@ -123,17 +125,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   return (
     <main className="product-detail-page">
-      <header className="detail-header">
-        <Link className="detail-brand" href="/">
-          MiO
-        </Link>
-        <div className="detail-header-actions">
-          <Link className="detail-back" href="/#products">
-            Product
-          </Link>
-          <LanguageSwitcher current="ko" koHref={`/products/${slug}`} enHref={productLanguageRoutes[slug]?.en ?? "/en"} />
-        </div>
-      </header>
+      <SiteHeader koHref={`/products/${slug}`} enHref={productLanguageRoutes[slug]?.en ?? "/en"} />
 
       <section className="detail-hero">
         <div className="detail-media">

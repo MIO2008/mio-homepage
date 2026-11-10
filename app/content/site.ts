@@ -101,8 +101,7 @@ export const koHomeContent: HomeContent = {
       subItems: [
         ["맞춤제작", "/technology/custom-production"],
         ["생산공정", "/technology/process"],
-        ["보유설비", "/technology/equipment"],
-        ["측정설비", "/technology/measurement"]
+        ["설비현황", "/technology/equipment"]
       ]
     },
     { label: "고객지원", href: "#contact" }
@@ -155,7 +154,7 @@ export const enHomeContent: HomeContent = {
     {
       label: "About",
       href: "#about",
-      subItems: [["About MIO", "/en/about"]]
+      subItems: [["About MIO", "/en/about"], ["Certifications", "/en/certifications"], ["Location", "/en/location"]]
     },
     {
       label: "Products",
@@ -165,6 +164,7 @@ export const enHomeContent: HomeContent = {
         ["DICING", "/en/dicing"]
       ]
     },
+    { label: "Technology", href: "/en/process", subItems: [["Custom Manufacturing", "/en/custom-production"], ["Production Process", "/en/process"], ["Facilities", "/en/equipment"]] },
     { label: "Contact", href: "#contact" }
   ],
   hero: {
@@ -190,6 +190,7 @@ export const enHomeContent: HomeContent = {
     kicker: "PRODUCTS",
     label: "Products",
     cards: [
+      { title: "Custom Manufacturing", summary: "Optical components made to customer specifications", href: "/en/custom" },
       { title: "COATING", summary: "E-Beam optical thin-film coating for optical components", href: "/en/coating" },
       { title: "DICING", summary: "Precision glass dicing and dimensional processing", href: "/en/dicing" }
     ]

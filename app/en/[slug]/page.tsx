@@ -1,8 +1,12 @@
+import Facilities from "../../components/Facilities";
+import CoatingProcess from "../../components/CoatingProcess";
+import EnglishOverview from "../../components/EnglishOverview";
+import { englishExtraPages } from "../../content/english-pages";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import LanguageSwitcher from "../../components/LanguageSwitcher";
+import SiteHeader from "../../components/SiteHeader";
 import ServiceDetail from "../../components/ServiceDetail";
 import { englishDetailPages, getEnglishDetailPage, SITE_URL } from "../../content/site";
 
@@ -11,11 +15,13 @@ type EnglishPageProps = {
 };
 
 export function generateStaticParams() {
-  return englishDetailPages.map((page) => ({ slug: page.slug }));
+  return [...englishDetailPages, ...englishExtraPages].map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata({ params }: EnglishPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const extra = englishExtraPages.find(page => page.slug === slug);
+  if (extra) return { title: `${extra.title} | MIO OPTICS`, description: extra.summary, alternates: { canonical: `${SITE_URL}/en/${slug}/`, languages: { ko: `${SITE_URL}${extra.koHref}/`, en: `${SITE_URL}/en/${slug}/` } } };
   const page = getEnglishDetailPage(slug);
 
   if (!page) {
@@ -51,6 +57,10 @@ export default async function EnglishDetailPage({ params }: EnglishPageProps) {
   if (slug === "coating" || slug === "dicing") {
     return <ServiceDetail slug={slug} english />;
   }
+  const extra = englishExtraPages.find(page => page.slug === slug);
+  if (extra?.kind === "equipment") return <Facilities english />;
+  if (extra?.kind === "process") return <CoatingProcess english />;
+  if (extra) return <EnglishOverview page={extra} />;
   const page = getEnglishDetailPage(slug);
 
   if (!page) {
@@ -59,18 +69,8 @@ export default async function EnglishDetailPage({ params }: EnglishPageProps) {
 
   if (page.kind === "about") {
     return (
-      <main className="info-page">
-        <header className="detail-header">
-          <Link className="detail-brand" href="/en">
-            MiO
-          </Link>
-          <div className="detail-header-actions">
-            <Link className="detail-back" href="/en#about">
-              ABOUT US
-            </Link>
-            <LanguageSwitcher current="en" koHref={page.koHref} enHref="/en/about" />
-          </div>
-        </header>
+      <main className="info-page" lang="en">
+        <SiteHeader english koHref={page.koHref} enHref={`/en/${slug}`} />
 
         <section className="info-hero">
           <p className="section-kicker">ABOUT US</p>
@@ -88,18 +88,8 @@ export default async function EnglishDetailPage({ params }: EnglishPageProps) {
   }
 
   return (
-    <main className="product-detail-page">
-      <header className="detail-header">
-        <Link className="detail-brand" href="/en">
-          MiO
-        </Link>
-        <div className="detail-header-actions">
-          <Link className="detail-back" href="/en#products">
-            Product
-          </Link>
-          <LanguageSwitcher current="en" koHref={page.koHref} enHref={`/en/${page.slug}`} />
-        </div>
-      </header>
+    <main className="product-detail-page" lang="en">
+      <SiteHeader english koHref={page.koHref} enHref={`/en/${slug}`} />
 
       <section className="detail-hero">
         <div className="detail-media">
