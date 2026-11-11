@@ -30,11 +30,8 @@ const routes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
-
   return [...routes.map(route => ({...route, languages: route.languages ?? (languagePairs[route.path] ? { ko: route.path, en: languagePairs[route.path] } : undefined)})), ...englishExtraPages.map(page => ({path: `/en/${page.slug}`, priority: 0.7, languages: { ko: page.koHref, en: `/en/${page.slug}` }}))].map((route) => ({
     url: new URL(route.path, siteUrl).toString(),
-    lastModified,
     changeFrequency: "monthly",
     priority: route.priority,
     alternates: route.languages

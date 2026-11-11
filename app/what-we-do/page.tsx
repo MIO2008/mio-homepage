@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_URL } from "../content/site";
 
 const processImages = [
   {
@@ -33,7 +34,16 @@ const processSteps = [
 
 export const metadata = {
   title: "광학코팅 및 Glass Dicing 서비스 | 주식회사 명인",
-  description: "Dicing, E-beam coating, and optical performance process overview."
+  description: "정밀 Dicing, E-beam 진공 증착과 양산 제품의 광학 특성 검증 공정을 소개합니다.",
+  alternates: { canonical: `${SITE_URL}/what-we-do/` },
+  openGraph: {
+    title: "광학코팅 및 Glass Dicing 서비스 | 주식회사 명인",
+    description: "정밀 Dicing, E-beam 진공 증착과 양산 제품의 광학 특성 검증 공정을 소개합니다.",
+    url: `${SITE_URL}/what-we-do/`,
+    type: "website",
+    locale: "ko_KR",
+    images: [{ url: "/assets/what-we-do-processes-no-labels.jpg", alt: "Dicing and E-beam coating process" }]
+  }
 };
 
 export default function WhatWeDoPage() {
