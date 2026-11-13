@@ -18,6 +18,8 @@ const products = [
   {
     slug: "coating",
     title: "COATING",
+    seoTitle: "증착코팅·AR 코팅 | 주식회사 명인",
+    seoDescription: "E-Beam 진공 증착 기반의 증착코팅과 AR 코팅 등 광학 박막 코팅으로 투과율, 반사율, 파장 특성을 제어합니다.",
     image: "/assets/technology-coating-equipment.jpg",
     summary: "E-beam 진공 증착 기반의 광학 박막 코팅으로 투과율, 반사율, 파장 특성을 정밀하게 제어합니다.",
     features: ["E-beam vacuum deposition", "Optical thin-film coating", "Spectral performance check"],
@@ -26,6 +28,8 @@ const products = [
   {
     slug: "dicing",
     title: "DICING",
+    seoTitle: "글라스 다이싱·정밀 절단 | 주식회사 명인",
+    seoDescription: "광학 및 전자 부품 소재의 글라스 다이싱과 정밀 절단을 진행하고, 요구 조건에 따라 치수와 외관을 확인합니다.",
     image: "/assets/technology-dicing-equipment.jpg",
     summary: "광학 및 전자 부품 소재를 목적 규격에 맞춰 정밀 절단하고, 치수와 외관을 안정적으로 검증합니다.",
     features: ["Precision dicing", "Dimension control", "Cleaning & inspection"],
@@ -33,7 +37,9 @@ const products = [
   },
   {
     slug: "optical-mirror",
-    title: "Optical Mirror",
+    title: "반사미러 (Optical Mirror)",
+    seoTitle: "반사미러·Optical Mirror | 주식회사 명인",
+    seoDescription: "정밀 코팅과 가공 조건을 기반으로 반사 성능과 표면 품질을 구현하는 광학 반사미러 제품입니다.",
     image: "/assets/detail-optical-mirror.jpg",
     summary: "정밀 코팅과 가공 조건을 기반으로 반사 성능과 표면 품질을 안정적으로 구현하는 광학 미러 제품입니다.",
     features: ["High reflection control", "Precision surface quality", "Custom size support"],
@@ -87,8 +93,8 @@ export async function generateMetadata({ params }: ProductPageProps) {
   }
 
   return {
-    title: `${product.title} | MIO MYUNG IN Optics CO.,LTD.`,
-    description: product.summary,
+    title: "seoTitle" in product ? product.seoTitle : `${product.title} | MIO MYUNG IN Optics CO.,LTD.`,
+    description: "seoDescription" in product ? product.seoDescription : product.summary,
     alternates: productLanguageRoutes[slug]
       ? {
           canonical: `${SITE_URL}${productLanguageRoutes[slug].ko}`,
