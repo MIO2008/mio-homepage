@@ -43,8 +43,8 @@ export default function WhatWeDoPage() {
         <Link className="detail-brand" href="/">
           MiO
         </Link>
-        <Link className="detail-back" href="/#what-we-do">
-          WHAT WE DO로 돌아가기
+        <Link className="detail-back" href="/#products">
+          제품·서비스로 돌아가기
         </Link>
       </header>
 
