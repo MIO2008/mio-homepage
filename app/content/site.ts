@@ -133,7 +133,12 @@ export const koHomeContent: HomeContent = {
     cards: [
       { title: "맞춤제작", summary: "고객 사양에 맞춘 광학 부품 제작", href: "/products/custom" },
       { title: "COATING", summary: "E-beam 기반 광학 박막 코팅", href: "/products/coating" },
-      { title: "DICING", summary: "정밀 절단 및 규격 가공", href: "/products/dicing" }
+      { title: "DICING", summary: "정밀 절단 및 규격 가공", href: "/products/dicing" },
+      {
+        title: "공정·서비스 개요",
+        summary: "Dicing·E-beam Coating 공정과 양산 특성 데이터",
+        href: "/what-we-do"
+      }
     ]
   },
   contact: {
